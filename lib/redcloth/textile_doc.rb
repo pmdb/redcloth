@@ -66,7 +66,8 @@ module RedCloth
     #
     def initialize( string, restrictions = [] )
       restrictions.each { |r| method("#{r}=").call( true ) }
-      super( string )
+     # super( string )
+	  super(string.chars.map { |x| x.bytesize > 1 ? "&##{x.unpack("U*").first};" : x }.join)
     end
 
     #
